@@ -1,0 +1,167 @@
+---
+title: <center> <h1>Intoduction to R programming</h1> </center>  
+author: <center> <h1>Salmaan Ansari</h1> </center>
+date: <center> <h1>15 August 2019</h1> </center>
+output: html_document 
+fontsize: 6pt 
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Basic data types
+R Programming works with numerous data types, including\
+
+.	Vectors (numerical, character, logical)\
+.	Matrices\
+.	Array\
+.	Data frames\
+.	Lists\
+.	Factors\
+\
+**Basics types**\
+.	4.5 is a decimal value called numerics.\
+.	4 is a natural value called integers. Integers are also numerics.\
+.	TRUE or FALSE is a Boolean value called logical.\
+.	The value inside " " or ' ' are text (string). They are called characters\
+
+
+```{r cars}
+a<-TRUE
+print(class(a))
+b<-4.5
+print(class(b))
+c<-2L
+print(class(c))
+d<-2+5i
+print(class(d))
+e<-"one"
+print(class(e))
+
+```
+
+## Vector
+A vector is a one-dimensional array. When generating a vector with more than one element, we should use the function c(), which means combining the elements into a vector.
+
+```{r}
+a <- c(1,2,5.3,6,-2,4) # numeric vector
+class(a)
+b <- c("one","two","three") # character vector
+class(b)
+c <- c(TRUE,TRUE,TRUE,FALSE,TRUE,FALSE) #logical vector
+class(c)
+```
+We can do arithmetic calculations on vectors.
+
+```{r}
+# Create the vectors
+vect_1 <- c(1, 3, 5)
+vect_2 <- c(2, 4, 6)
+# Take the sum of A_vector and B_vector
+sum_vect <- vect_1 + vect_2
+# Print out total_vector
+sum_vect
+```
+
+In R, a vector may be sliced. Suppose we're only interested in the first five rows of the vector.
+```{r}
+# Slice the first five rows of the vector
+slice_vector <- c(1,2,3,4,5,6,7,8,9,10)
+slice_vector[1:5]
+```
+The simplest and shortage way to create a range of values is to use ":" between two numbers.
+```{r}
+# want to create a vector of value from one to ten.
+vect<-c(1:10)
+vect
+```
+## Matrices
+
+A matrix is a two-dimensional rectangular data set. It can be created using a vector input to the matrix function. All columns in a matrix must have the same mode(numeric, character, etc.) and the same length.In other words, matrix is a combination of two or more vectors with the same data type.\
+
+We can create a matrix with the function matrix(). This function takes three arguments:
+```{r}
+# generates 5 x 4 numeric matrix
+y<-matrix(1:20, nrow=5,ncol=4)
+y
+# To see the dimesion
+```
+**Arguments:** 
+
+**data** :The collection of elements that R will arrange into the rows and columns of the matrix  
+**nrow:** Number of rows   
+**ncol:** Number of columns   
+**byrow:** The rows are filled from the left to the right. We use `byrow = FALSE` (default values), if we want the matrix to be filled by the columns i.e. the values are filled top to bottom.  
+ 
+ Let's construct two 5x2 matrix with a sequence of number from 1 to 10, one with byrow = TRUE and one with byrow = FALSE to see the difference.
+```{r}
+# Construct a matrix with 5 rows that contain the numbers 1 up to 10 and byrow =  TRUE 
+matrix_a <-matrix(1:10, byrow = TRUE, nrow = 5)
+matrix_a
+dim(matrix_a) # dimension
+
+# Construct a matrix with 5 rows that contain the numbers 1 up to 10 and byrow =  FALSE
+matrix_b <-matrix(1:10, byrow = FALSE, nrow = 5)
+matrix_b
+dim(matrix_b) #dimension
+```
+**Note:** Using command matrix_b <-matrix(1:10, byrow = FALSE, ncol = 2) will have same effect as above.\  
+
+If we want to give the names for each column and each rows, then we can use below command
+```{r}
+# want to mention name for each column and each row
+cells <- c(1,26,24,68)
+rnames <- c("R1", "R2")
+cnames <- c("C1", "C2")
+mymatrix <- matrix(cells, nrow=2, ncol=2, byrow=TRUE,
+  dimnames=list(rnames, cnames))
+```
+
+## Array
+While matrices are confined to two dimensions, arrays can be of any number of dimensions. The array function takes a dim attribute which creates the required number of dimension.\  
+In the below example we create an array with two elements which are 3x3 matrices each.
+
+```{r}
+# Create an array.
+a <- array(c('green','yellow'),dim = c(3,3,2))
+print(a)
+```
+## Data Frames
+A data frame is more general than a matrix, in that different columns can have different modes (numeric, character, factor, etc.).\   
+\
+Data Frames are created using the data.frame() function.
+```{r}
+# Create the data frame.
+BMI <- 	data.frame(
+   gender = c("Male", "Male","Female"), 
+   height = c(152, 171.5, 165), 
+   weight = c(81,93, 78),
+   Age = c(42,38,26)
+)
+print(BMI)
+```
+
+##List
+A list is an R-object which can contain many different types of elements inside it like vectors, functions and even another list inside it.
+
+```{r}
+# Create a list containing strings, numbers, vectors and a logical
+# values.
+list_data <- list("Red", "Green", c(21,32,11), TRUE, 51.23, 119.1)
+print(list_data)
+```
+##Factors
+R factor is used to store categorical data as levels. It can store both character and integer types of data. These factors are created with the help of factor() functions, by taking a vector as input.
+
+```{r}
+# Create a vector.
+apple_colors <- c('green','green','yellow','red','red','red','green')
+
+# Create a factor object.
+factor_apple <- factor(apple_colors)
+
+# Print the factor.
+print(factor_apple)
+print(nlevels(factor_apple))
+```
